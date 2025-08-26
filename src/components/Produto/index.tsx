@@ -1,5 +1,7 @@
 'use client';
 
+import { useCart } from "@/contexts/CartContext";
+import { useAlert } from "@/contexts/AlertContext";
 import { ProdutoProps } from "@/interfaces/ProdutoProps";
 import Image from "next/image";
 import { useState } from "react";
@@ -7,6 +9,8 @@ import { FaShoppingCart } from "react-icons/fa";
 
 export default function Produto({ produto }: ProdutoProps) {
     const [quantidade, setQuantidade] = useState(1);
+    const { addToCart } = useCart();
+    const { addAlert } = useAlert();
 
     const aumentarQuantidade = () => {
         setQuantidade(quantidade + 1);
@@ -17,7 +21,9 @@ export default function Produto({ produto }: ProdutoProps) {
     }
 
     const handleAdicionarCarrinho = () => {
-        console.log(`Adicionado ${quantidade} de ${produto.nome} ao carrinho.`);
+        addToCart(produto, quantidade);
+        addAlert(`${quantidade} ${produto.nome} adicionado(s) ao carrinho!`, 'success');
+        setQuantidade(1);
     }
 
     return (
@@ -82,7 +88,6 @@ export default function Produto({ produto }: ProdutoProps) {
                 Adicionar <FaShoppingCart />
                 </button>
             </div>
-
         </div>
     );
 }

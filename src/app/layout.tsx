@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import "./globals.css";
 import favicon from "@/assets/img/logo-jordan.svg";
+import { CartProvider } from "@/contexts/CartContext";
+import { AlertProvider } from "@/contexts/AlertContext";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -30,7 +32,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${archivo.variable}`}>
-        {children}
+        <AlertProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AlertProvider>
       </body>
     </html>
   );
