@@ -5,6 +5,7 @@ import Image from "next/image";
 import { BadgeCartProps } from "@/interfaces/BadgeCartProps";
 import { useCart } from "@/contexts/CartContext";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function BadgeCart({ isOpen, onClose, items }: BadgeCartProps) {
   const { increaseQuantity, decreaseQuantity, removeFromCart, getTotalPrice } = useCart();
@@ -150,9 +151,9 @@ export default function BadgeCart({ isOpen, onClose, items }: BadgeCartProps) {
                 })}
               </span>
             </div>
-            <button className="w-full bg-brand hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
+            <Link href="/checkout" className="w-full block text-center bg-brand hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
               Finalizar Compra
-            </button>
+            </Link>
           </div>
         )}
       </div>
